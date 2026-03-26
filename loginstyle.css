@@ -1,0 +1,355 @@
+body{
+    margin: 0;
+}
+
+nav{
+    background-color: rgb(255, 255, 255);
+    padding: 15px 25px;
+    color: #2c396e;
+    box-shadow: 0 0 3px 1px ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.university-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.university-titles{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.university-title{
+    margin: 0;
+    color: #2c396e;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+}
+
+.university-titlebelow{
+    margin: 0;
+    color: #2c396e;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+}
+
+.main-container{
+    position: relative;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 60px;
+}
+
+.main-container .main-bg-image{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.overlay{
+    position: absolute;
+    inset: 0;
+    background-color: rgba(44, 57, 110, 0.55);
+    z-index: 1;
+}
+
+.main-layout{
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 50px;
+    width: 100%;
+    max-width: 1100px;
+    align-items: center;
+}
+
+.login-container{
+    background-color: white;
+    border-radius: 40px;
+    padding: 40px 50px 45px 50px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+    width: 350px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.login-title{
+    margin: 0 0 30px 0;
+    text-align: center;
+    color: #2c396e;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-label{
+    font-size: 14px;
+    color: #2c396e;
+}
+
+.form-input{
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 2px solid #2c396e;
+    outline: none;
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.form-input:focus{
+    border-color: #1f2a58;
+}
+
+.get-started-btn{
+    margin-top: 16px;
+    align-self: center;
+    padding: 10px 32px;
+    border-radius: 999px;
+    border: 2px solid #2c396e;
+    background-color: white;
+    color: #2c396e;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.get-started-btn:hover{
+    background-color: #2c396e;
+    color: white;
+}
+
+.error-message{
+    color: #b00020;
+    font-size: 14px;
+    margin: 0 0 8px 0;
+    text-align: center;
+}
+
+.content{
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.subtitle{
+    color: white;
+    font-size: 16px;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.5px;
+}
+
+.title{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+}
+
+.description{
+    color: white;
+    font-size: 16px;
+    line-height: 26px;
+    margin: 0 0 28px 0;
+}
+
+.login-btn{
+    display: inline-block;
+    background-color: white;
+    color: #2c396e;
+    padding: 12px 32px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.login-btn:hover{
+    color: white;
+    background-color: #2c396e;
+}
+
+/* tablet view */
+@media (max-width: 1024px) and (min-width: 769px) {
+    nav {
+        flex-direction: row;
+        align-items: center;
+        padding: 12px 20px;
+    }
+
+    .university-title {
+        font-size: 22px;
+    }
+
+    .university-titlebelow {
+        font-size: 13px;
+    }
+
+    .main-container {
+        padding: 30px 40px;
+    }
+
+    .main-layout{
+        flex-direction: column;
+        gap: 35px;
+        align-items: center;
+    }
+
+    .login-container {
+        width: 320px;
+        padding: 35px 40px 40px 40px;
+    }
+
+    .login-title{
+        font-size: 24px;
+    }
+
+    .form-input{
+        font-size: 13px;
+    }
+
+    .get-started-btn{
+        font-size: 14px;
+        padding: 9px 28px;
+    }
+
+    .content{
+        max-width: 80%;
+        text-align: center;
+    }
+
+    .subtitle{
+        font-size: 15px;
+    }
+
+    .title{
+        font-size: 35px;
+    }
+
+    .description{
+        font-size: 14px;
+        line-height: 22px;
+    }
+}
+
+/* mobile view */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px;
+    }
+
+    .university-container {
+        gap: 8px;
+    }
+
+    .university-title {
+        font-size: 20px;
+    }
+
+    .university-titlebelow {
+        font-size: 12px;
+    }
+
+    .main-container {
+        padding: 20px;
+    }
+
+    .main-layout{
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+    }
+
+    .login-container {
+        width: 280px;
+        padding: 30px 35px 35px 35px;
+    }
+
+    .login-title{
+        font-size: 22px;
+    }
+
+    .form-input{
+        font-size: 12px;
+    }
+
+    .get-started-btn{
+        font-size: 13px;
+        padding: 8px 25px;
+    }
+
+    .content{
+        max-width: 90%;
+        text-align: center;
+    }
+
+    .subtitle{
+        font-size: 14px;
+    }
+
+    .title{
+        font-size: 32px;
+    }
+
+    .description{
+        font-size: 13px;
+        line-height: 20px;
+    }
+}
+
+/* extra small screens (phones in portrait) */
+@media (max-width: 480px) {
+    .title{
+        font-size: 24px;
+    }
+
+    .description{
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .login-container{
+        width: 240px;
+        padding: 25px 30px 30px 30px;
+    }
+
+    .login-title{
+        font-size: 20px;
+    }
+
+    .form-input{
+        font-size: 12px;
+    }
+
+    .get-started-btn{
+        font-size: 12px;
+        padding: 7px 20px;
+    }
+}

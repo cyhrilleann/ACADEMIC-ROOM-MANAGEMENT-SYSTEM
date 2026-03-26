@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="icon" href="CIT LOGO.png" type="image/x-icon">
+</head>
+<body>
+  <nav>
+    <div class="university-container">
+      <img src="CIT LOGO.png" width="65px" alt="Logo" />
+      <div class="university-titles">
+        <h2 class="university-title">Bulacan State University</h2>
+        <h3 class="university-titlebelow">College of Industrial Technology</h3>
+      </div>
+    </div>
+
+    <div class="menu-toggle" id="menuToggle" aria-label="Open menu" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="links-container" id="navLinks">
+      <a class="link" href="home.html">Home</a>
+      <a class="link" href="about.html">About</a>
+      <a class="btn-link" href="startup.html">Logout</a>
+    </div>
+  </nav>
+
+  <main class="main-container">
+    <img class="main-bg-image" src="CIT Building.jpg" alt="CIT Building" />
+    <div class="overlay"></div>
+
+    <section class="cards">
+      <article class="card">
+        <h3 class="card-title">Vacant Room</h3>
+      </article>
+
+      <article class="card">
+        <h3 class="card-title">OccupiedRoom</h3>
+        <div class="pill">
+          <span class="pill-room">AHE-ELEARN LAB</span>
+          <span class="pill-time">1:00 - 3:00PM</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3 class="card-title">Room Information</h3>
+        <div class="status-pill">OCCUPIED</div>
+        <div class="time">01:00:30</div>
+        <div class="info">
+          <p><strong>Instructor:</strong> <span class="muted">Mr. Real Cabuyaban</span></p>
+          <p><strong>Schedule:</strong> <span class="muted">1:00PM - 3:00PM</span></p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const navLinks = document.getElementById('navLinks');
+    const menuToggle = document.getElementById('menuToggle');
+
+    function toggleMenu() {
+      navLinks.classList.toggle('active');
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    menuToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') toggleMenu();
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,16 @@
+/* Force dashboard cards to show above the background overlay */
+.overlay{
+    z-index: 0 !important;
+}
+
+.cards,
+.card{
+    position: relative !important;
+    z-index: 3 !important;
+}
+
+/* Move content to the upper part of the card */
+.card{
+    justify-content: flex-start !important;
+}
+

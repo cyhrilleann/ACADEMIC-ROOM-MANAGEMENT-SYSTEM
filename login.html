@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="loginstyle.css"/>
+        <link rel="icon" href="CIT LOGO.png" type="image/x-icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <nav>
+            <div class="university-container">
+                <img src="CIT LOGO.png" width="65px"/>
+                <div class="university-titles">
+                    <h2 class="university-title">Bulacan State University</h2>
+                    <h3 class="university-titlebelow">College of Industrial Technology</h3>
+                </div>
+            </div>
+        </nav>
+        <div class="main-container">
+            <img class="main-bg-image" src="CIT Building.jpg" alt="CIT Building"/>
+            <div class="overlay"></div>
+
+            <div class="main-layout">
+                <div class="login-container">
+                    <h2 class="login-title">Login</h2>
+                    <form class="login-form" id="login-form" action="loginform.php" method="post">
+                        <div class="form-group">
+                            <label class="form-label" for="username">Username</label>
+                            <input class="form-input" type="text" id="username" name="username" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-input" type="password" id="password" name="password" required />
+                            <div class="message" id="error-message"></div>
+                            <script src="loginmessage.js"></script>
+                            <button type="submit" class="get-started-btn">Login</button> <br>
+                        </div>
+                    </form>
+                </div>
+                <div class="content">
+                    <p class="subtitle">Smarter Spaces for Smarter Learning</p>
+                    <h1 class="title">Academic Room Management System</h1>
+                    <p class="description">A real-time platform for monitoring room availability, optimizing utilization, and minimizing scheduling conflicts in academic institutions.</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
