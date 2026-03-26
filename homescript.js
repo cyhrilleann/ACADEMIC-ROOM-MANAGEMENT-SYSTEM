@@ -5,6 +5,10 @@ let lastAlertMinute = -1;
 let currentTrackingStart = null;
 let isAudioEnabled = false;
 
+function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("active");
+}
+
 // Eto ang mag-a-activate sa browser permission
 function enableEverything() {
     Notification.requestPermission().then(permission => {
