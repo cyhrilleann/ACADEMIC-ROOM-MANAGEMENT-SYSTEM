@@ -34,30 +34,40 @@ async function fetchData() {
 }
 
 function updateUI(data) {
+    console.log(data); // debug
+
     const vacantList = document.getElementById('vacant-list');
     const occupiedList = document.getElementById('occupied-list');
     const timerSection = document.getElementById('timer-section');
 
-    const pill = `<span class="pill">${data.room} <small>${data.schedule}</small></span>`;
-    document.getElementById('instName').innerText = data.instructor;
-    document.getElementById('roomSched').innerText = data.schedule;
+    // 🔥 FIXED FIELD MAPPING
+    const room = data.room || "N/A";
+    const instructor = data.name || "N/A";
+    const schedule = data.timestamp || "N/A"; 
+    const status = data.action === "in" ? "Occupied" : "Vacant";
+    const startTime = data.timestamp;
+
+    const pill = `<span class="pill">${room} <small>${schedule}</small></span>`;
+
+    document.getElementById('instName').innerText = instructor;
+    document.getElementById('roomSched').innerText = schedule;
 
     const statusLabel = document.getElementById('roomStatus');
-    statusLabel.innerText = data.status.toUpperCase();
-    statusLabel.className = `status ${data.status.toLowerCase()}`;
+    statusLabel.innerText = status.toUpperCase();
+    statusLabel.className = `status ${status.toLowerCase()}`;
 
-    if (data.status === "Occupied") {
-        occupiedList.innerHTML = pill; 
+    if (status === "Occupied") {
+        occupiedList.innerHTML = pill;
         vacantList.innerHTML = "";
         timerSection.style.display = "block";
 
-        if (currentTrackingStart !== data.startTime) {
-            currentTrackingStart = data.startTime;
-            lastAlertMinute = 0; // Reset sa start ng session
-            startTimer(data.startTime);
+        if (currentTrackingStart !== startTime) {
+            currentTrackingStart = startTime;
+            lastAlertMinute = 0;
+            startTimer(startTime);
         }
     } else {
-        vacantList.innerHTML = pill; 
+        vacantList.innerHTML = pill;
         occupiedList.innerHTML = "";
         timerSection.style.display = "none";
         clearInterval(timerInterval);
