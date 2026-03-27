@@ -1,26 +1,11 @@
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxASfii_gfA6_Snw83ot_iMswDpekTjmVJcZPi10RBjWLlallV8rS15FG53hjk-0VifDw/exec";
 
 let timerInterval;
-let lastAlertMinute = -1; 
+let lastAlertMinute = -1;
 let currentTrackingStart = null;
-let isAudioEnabled = false;
 
-function toggleMenu() {
-    document.getElementById("navLinks").classList.toggle("active");
-}
-
-// Eto ang mag-a-activate sa browser permission
-function enableEverything() {
-    Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-            // Test Notification
-            new Notification("✅ Notifications Enabled", { body: "Makakatanggap ka na ng overtime alerts." });
-            document.getElementById('setup-section').style.display = 'none';
-            isAudioEnabled = true;
-        } else {
-            alert("Pakiset ang Browser Permission sa 'Allow' para sa Notifications.");
-        }
-    });
+function toggleMenu() { 
+    document.getElementById('navLinks').classList.toggle('active'); 
 }
 
 async function fetchData() {
@@ -34,40 +19,29 @@ async function fetchData() {
 }
 
 function updateUI(data) {
-    console.log(data); // debug
-
     const vacantList = document.getElementById('vacant-list');
     const occupiedList = document.getElementById('occupied-list');
     const timerSection = document.getElementById('timer-section');
 
-    // 🔥 FIXED FIELD MAPPING
-    const room = data.room || "AH E-LEARN LAB";
-    const instructor = data.name || "Mr. Cabuyaban";
-    const schedule = data.timestamp || "1:"00PM - 3:00PM"; 
-    const status = data.action === "in" ? "Occupied" : "Vacant";
-    const startTime = data.timestamp;
-
-    const pill = `<span class="pill">${room} <small>${schedule}</small></span>`;
-
-    document.getElementById('instName').innerText = instructor;
-    document.getElementById('roomSched').innerText = schedule;
+    const pill = `<span class="pill">${data.room} <small>${data.schedule}</small></span>`;
+    document.getElementById('instName').innerText = data.instructor;
+    document.getElementById('roomSched').innerText = data.schedule;
 
     const statusLabel = document.getElementById('roomStatus');
-    statusLabel.innerText = status.toUpperCase();
-    statusLabel.className = `status ${status.toLowerCase()}`;
+    statusLabel.innerText = data.status.toUpperCase();
+    statusLabel.className = `status ${data.status.toLowerCase()}`;
 
-    if (status === "Occupied") {
-        occupiedList.innerHTML = pill;
+    if (data.status === "Occupied") {
+        occupiedList.innerHTML = pill; 
         vacantList.innerHTML = "";
         timerSection.style.display = "block";
 
-        if (currentTrackingStart !== startTime) {
-            currentTrackingStart = startTime;
-            lastAlertMinute = 0;
-            startTimer(startTime);
+        if (currentTrackingStart !== data.startTime) {
+            currentTrackingStart = data.startTime;
+            startTimer(data.startTime);
         }
     } else {
-        vacantList.innerHTML = pill;
+        vacantList.innerHTML = pill; 
         occupiedList.innerHTML = "";
         timerSection.style.display = "none";
         clearInterval(timerInterval);
@@ -76,44 +50,28 @@ function updateUI(data) {
     }
 }
 
-function triggerOvertimeAlert(minute) {
-    console.log("ALERT TRIGGERED FOR MINUTE: " + minute);
-
-    // 1. Browser Notification
-    if (Notification.permission === "granted") {
-        new Notification("⚠️ OVERTIME ALERT", {
-            body: `Instructor has been in the room for ${minute} minute(s).`,
-            requireInteraction: true,
-            icon: "https://cdn-icons-png.flaticon.com/512/564/564619.png"
-        });
-    }
-
-    // 2. Sound Alert (Kailangan may interaction muna sa page)
-    if (isAudioEnabled) {
-        let audio = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
-        audio.play().catch(e => console.log("Sound blocked by browser"));
-    }
-
-    // 3. Fallback Alert (HINDI ITO NABA-BLOCK NG BROWSER)
-    // Lalabas ito kahit nasa ibang tab ka
-    setTimeout(() => {
-        alert("🚨 OVERTIME ALERT!\nRoom occupied for " + minute + " minute(s).");
-    }, 500);
-}
-
 function startTimer(startTimeStr) {
     clearInterval(timerInterval);
     if (!startTimeStr) return;
 
+    // 1. Linisin ang format para maging Local Time
     let cleanStr = startTimeStr.replace(/-/g, '/').replace('T', ' ');
     let startDate = new Date(cleanStr);
 
     timerInterval = setInterval(() => {
         const now = new Date();
+        
+        // 2. Kunin ang difference sa milliseconds
         let diff = now.getTime() - startDate.getTime();
 
-        // Latency Compensation (4s delay fix + 1s offset)
+        /**
+         * LATENCY COMPENSATION FIX:
+         * Nagdadagdag tayo ng 4000ms (4 seconds) para mabawi yung 
+         * delay ng pagpapadala ng data mula Arduino hanggang Google Sheets.
+         * Dagdagan din natin ng 1000ms para mag-start sa 00:01.
+         */
         let adjustedDiff = diff + 4000 + 1000; 
+
         if (adjustedDiff < 0) adjustedDiff = 0;
 
         const totalSeconds = Math.floor(adjustedDiff / 1000);
@@ -124,15 +82,9 @@ function startTimer(startTimeStr) {
         if (display) {
             display.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
             
-            // --- CRITICAL ALERT LOGIC ---
+            // Overtime color logic
             if (mins >= 1) { 
                 display.style.color = "crimson";
-
-                // Tuwing magbabago ang minuto at hindi pa tayo nag-a-alert sa minutong ito
-                if (mins > lastAlertMinute) {
-                    triggerOvertimeAlert(mins);
-                    lastAlertMinute = mins;
-                }
             } else { 
                 display.style.color = ""; 
             }
@@ -140,5 +92,6 @@ function startTimer(startTimeStr) {
     }, 1000);
 }
 
+// Initial sync
 setInterval(fetchData, 2000);
 fetchData();
