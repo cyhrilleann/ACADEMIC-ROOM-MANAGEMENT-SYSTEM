@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwepgh0Y5ZuT_RuyU99f7A4no1M6-bUs288LxKiLeMoyck1d5kuBVaRT5VWHzA-4Y4BIg/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxASfii_gfA6_Snw83ot_iMswDpekTjmVJcZPi10RBjWLlallV8rS15FG53hjk-0VifDw/exec";
 
 let timerInterval;
 let lastAlertMinute = -1; 
