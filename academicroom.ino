@@ -22,7 +22,7 @@ String masterID = "0BB02406";
 const unsigned long CLASS_LIMIT_MS = 60000;  // 1 Minute limit for testing
 const unsigned long WARNING_TIME_MS = 30000;
 
-const char* ssid = "EECH TECH";
+const char* ssid = "EEC TECH";
 const char* password = "1234567eight";
 
 // SCRIPT ID MULA SA GOOGLE APPS SCRIPT
