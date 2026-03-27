@@ -19,9 +19,9 @@ async function fetchData() {
 
 function updateUI(data) {
     // Siguraduhin na may default value kung walang data
-    const room = data.room || "N/A";
-    const instructor = data.instructor || "No Instructor";
-    const schedule = data.schedule || "No Schedule";
+    const room = data.room || "AH E-LEARN LAB";
+    const instructor = data.instructor || "Mr. Cabuyaban";
+    const schedule = data.schedule || "1:00PM-3:00PM";
     const status = data.status ? data.status.toUpperCase() : "UNKNOWN";
 
     // 1. I-update ang Room Information (Right Card)
