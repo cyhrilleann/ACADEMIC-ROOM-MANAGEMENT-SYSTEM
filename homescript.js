@@ -41,9 +41,9 @@ function updateUI(data) {
     const timerSection = document.getElementById('timer-section');
 
     // 🔥 FIXED FIELD MAPPING
-    const room = data.room || "N/A";
-    const instructor = data.name || "N/A";
-    const schedule = data.timestamp || "N/A"; 
+    const room = data.room || "AH E-LEARN LAB";
+    const instructor = data.name || "Mr. Cabuyaban";
+    const schedule = data.timestamp || "1:"00PM - 3:00PM"; 
     const status = data.action === "in" ? "Occupied" : "Vacant";
     const startTime = data.timestamp;
 
